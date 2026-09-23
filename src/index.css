@@ -1,0 +1,13 @@
+h4 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+strong {
+    font-weight: bold;
+}

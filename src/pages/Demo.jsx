@@ -7,7 +7,17 @@ export const Demo = () => {
   const { store, dispatch } = useGlobalReducer()
 
   return (
-    <div className="container">
+    <div className="container text-center">
+      <h4>Demo del Context API</h4>
+      <p>Esta página muestra cómo funciona el store global con useReducer.</p>
+      <br/>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <h4>Saludos! 😁</h4>
+      <h3>Gracias por ver! 🙌</h3>
+      
+
       <ul className="list-group">
         {/* Map over the 'todos' array from the store and render each item as a list element */}
         {store && store.todos?.map((item) => {
@@ -36,7 +46,7 @@ export const Demo = () => {
       <br />
 
       <Link to="/">
-        <button className="btn btn-primary">Back home</button>
+        <button className="btn btn-primary">Regresar</button>
       </Link>
     </div>
   );
