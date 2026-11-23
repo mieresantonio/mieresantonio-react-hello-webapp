@@ -1,73 +1,72 @@
-# WebApp Template with React JS
+# Lista de Contactos — React + Context API
 
+Aplicación de lista de contactos con operaciones CRUD completas contra una API real: crear, listar, editar y eliminar contactos, con estado global gestionado con Context API + `useReducer` y rutas con React Router.
 
-Used by 4Geeks.com and 4Geeks Academy students, this template helps to bootstrap your first multi-page web applications by integrating with React latest version, vercel deployments and [Vite](https://4geeks.com/lesson/intro-to-vite-module-bundler) for bundling.
+Ejercicio del bootcamp Full Stack de 4Geeks Academy, completado el 23 de septiembre de 2026. Es el ejercicio más sólido del bootcamp: el único que toca una API real con las cuatro operaciones.
 
-### Getting stated:
+> El nombre del repositorio es el genérico de la plantilla (`react-hello-webapp`); el proyecto que contiene es esta lista de contactos.
 
-> 📦 Make sure you are using at least node version 20.
+## Qué hace
 
-1. Install the node package dependencies by typing: `$ npm install`
+- **Listar contactos** desde la API pública de 4Geeks (`playground.4geeks.com/contact`), en la agenda `mieresantonio`.
+- **Crear y editar** contactos (nombre, correo, teléfono, dirección) con el mismo formulario en `/add` y `/edit/:id`.
+- **Eliminar** con modal de confirmación que muestra el nombre del contacto antes de borrar.
+- **Crear la agenda automáticamente**: si la agenda no existe (la API responde 404), la app la crea vacía y vuelve a cargar.
+- **Estados de carga y error**: indicador de "Cargando contactos...", mensaje de error si no hay conexión y mensaje de lista vacía.
 
-2. Create a .env file by typing `$ cp .env.example .env`
+## Stack
 
-3. Start coding! and the vite dev server with live reload by typing: `$ npm run start`
+| Tecnología | Uso |
+|-----------|-----|
+| React 18.2 | Componentes y hooks |
+| React Router 6 | Rutas `/`, `/add`, `/edit/:id` |
+| Context API + `useReducer` | Estado global (`store.js`, hook `useGlobalReducer`) |
+| Vite 4 | Bundler y servidor de desarrollo |
+| Bootstrap 5.3 + Font Awesome | Estilos (por CDN) |
+| API REST de 4Geeks | Persistencia de los contactos |
 
+## Cómo correrlo
 
-### Styling
+Requiere Node ≥ 20.
 
-You can update the `./index.css` or create new `.css` files and import them into your current css or js files depending on your needs.
-
-### Components
-
-Add more files into your `./src/components` or styles folder as you need them and import them into your current files as needed.
-
-💡Note: There is an example using the Context API inside `pages/demo.js`;
-
-### Pages
-
-Add more files into your `./js/pages` and import them in `./routes.jsx`.
-Each page must match at least one route inside `routes.jsx`
-
-### Centralized Store with useReducer
-
-This template comes with a centralized & general state that's shared with all pages and compoentes, we call it "the store".   
-
-The file `./src/store.js` has a default structure for the store, we encourage you to change it and adapt it to your data needs (for example, if you are doing a `Todo list` you will probably have a array of todos here).
-
-+ Learn [how the useReducer works](https://4geeks.com/lesson/optimize-react-components-usereducer).
-+ Read more about [implementing a global state with Context API](https://4geeks.com/lesson/context-api)
-+ Read more about [react hooks](https://content.breatheco.de/lesson/react-hooks-explained)
-
-The store `Provider` for this context is already set on `./src/main.jsx`. You can access the store from any component using the `useGlobalReducer` hook to get the `store` and `dispatcher`. Check `/views/demo.js` to see a demo. Here is a smaller sample:
-
-```jsx
-import useGlobalReducer from "./src/hooks/useGlobalReducer";
-
-const MyComponentSuper = () => {
-  //here you use the hook to get dispatcher and store
-  import { dispatch, store } = useGlobalReducer();
-
-  return <div>{/* you can use your actions or store inside the html */}</div>
-}
+```bash
+npm install
+npm run start
 ```
 
-## Publish your website!
+La app abre en `http://localhost:3000` (puerto por defecto de Vite en esta plantilla).
 
-1. **Vercel:** The FREE recomended hosting provider is [vercel.com](https://vercel.com/), you can deploy in 1 minutes by typing the following 2 commands:
+## Estructura
 
-Login (you need to have an account):
-```sh
-$ npm i vercel -g && vercel login
 ```
-Deploy:
-```sh
-$ vercel --prod
+src/
+├── pages/
+│   ├── Contact.jsx       # Lista de contactos (ruta /)
+│   └── AddContact.jsx    # Formulario crear/editar (rutas /add y /edit/:id)
+├── components/
+│   ├── ContactCard.jsx   # Tarjeta de un contacto con editar y borrar
+│   ├── ConfirmModal.jsx  # Modal de confirmación antes de eliminar
+│   ├── Navbar.jsx        # Barra superior de la plantilla
+│   └── Footer.jsx
+├── store/
+│   ├── contactActions.js # fetch a la API: listar, crear, editar, eliminar
+│   └── store.js          # Estado inicial y reducer (contacts, isLoading, errorMsg)
+├── hooks/
+│   └── useGlobalReducer.jsx
+├── routes.jsx            # Definición de rutas
+└── main.jsx
 ```
-✎ Note: If you don't have an account just go to vercel.com, create a account and come back here.
 
-![Vercel example procedure to deploy](https://github.com/4GeeksAcademy/react-hello-webapp/blob/4b530ba091a981d3916cc6e960e370decaf2e234/docs/deploy.png?raw=true)
+## Qué demuestra
 
-## Contributors
+- CRUD completo contra una API REST real (GET, POST, PUT, DELETE con `fetch`).
+- Estado global con Context API + `useReducer`: acciones `set_loading`, `set_contacts` y `set_error`.
+- Rutas dinámicas (`/edit/:id`) y navegación programática.
+- Manejo de casos reales: agenda inexistente (404), errores de red, lista vacía y confirmación antes de una acción destructiva.
 
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) and [CyberSecurity Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/cybersecurity).
+## Notas
+
+- La agenda `mieresantonio` vive en la API pública de práctica de 4Geeks: cualquiera con la URL puede ver sus contactos. Es un entorno de práctica, no un lugar para datos reales.
+- El repo incluye `vercel.json`, así que está listo para desplegarse en Vercel con `vercel --prod`.
+- Las páginas `/demo` y `/single/:theId` son restos de la plantilla, sin uso en la app.
+- Construido sobre la plantilla `react-hello-webapp` de 4Geeks Academy.
